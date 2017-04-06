@@ -9,6 +9,8 @@ private:
   int          m_integer;
   unsigned int m_fraction;
 
+  const unsigned int FRACTION_MAX = 1000; //Máximo permitido com 10 bits (1023)
+
 public:
   FixedPoint(int t_integer=0, unsigned int t_fraction=0) :
     m_integer(t_integer), m_fraction(t_fraction){}
@@ -26,6 +28,7 @@ public:
   FixedPoint& operator = (const FixedPoint& that) noexcept;
   FixedPoint  operator + (const FixedPoint& that) noexcept;
   FixedPoint  operator - (const FixedPoint& that) noexcept;
+  FixedPoint  operator * (const FixedPoint& that) noexcept;
 
   friend std::ostream& operator << (std::ostream& os,
 				    const FixedPoint& that) {

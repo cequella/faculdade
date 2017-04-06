@@ -33,12 +33,6 @@ FixedPoint& FixedPoint::operator = (const FixedPoint& that) noexcept {
 FixedPoint FixedPoint::operator + (const FixedPoint& that) noexcept {
   integer(integer() + that.integer());
   fraction(fraction() + that.fraction());
-
-  if(fraction() >= 1000){
-    fraction( fraction()-1000 );
-    integer( integer()+1 );
-  }
-  
   return *this;
 }
 FixedPoint FixedPoint::operator - (const FixedPoint& that) noexcept {
@@ -54,6 +48,11 @@ FixedPoint FixedPoint::operator - (const FixedPoint& that) noexcept {
   
   return *this;
 }
+FixedPoint FixedPoint::operator * (const FixedPoint& that) noexcept {
+  unsigned short temp = 0;
+  
+  return *this;
+}
 
 FixedPoint FixedPoint::integer(int t_integer) noexcept {
   m_integer = t_integer;
@@ -62,9 +61,9 @@ FixedPoint FixedPoint::integer(int t_integer) noexcept {
 FixedPoint FixedPoint::fraction(unsigned int t_fraction) noexcept {
   m_fraction = t_fraction;
 
-  if(m_fraction > 1000){
+  if(m_fraction > FRACTION_MAX){
     m_integer++;
-    m_fraction-=1000;
+    m_fraction-=FRACTION_MAX;
   }
   
   return *this;
