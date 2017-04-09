@@ -1,14 +1,15 @@
 #include <iostream>
 
-#include "FixedPoint.hpp"
+#include "FixedPointMachine.hpp"
 
 using namespace std;
 
-int main(){
-  FixedPoint a(2,1);
-  FixedPoint b(3,5);
+int main(int, char** argv){
 
-  cout << a-b << endl;
+  FixedPointMachine lhs(argv[1]);
+  FixedPointMachine rhs(argv[2]);
+  
+  cout << lhs << endl;
   
   return 0;
 }
