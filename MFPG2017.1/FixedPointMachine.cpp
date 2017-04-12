@@ -87,19 +87,33 @@ FixedPointMachine FixedPointMachine::operator - (const FixedPointMachine& that) 
   return FixedPointMachine(t_integer, t_fraction);
 }
 FixedPointMachine FixedPointMachine::operator * (const FixedPointMachine& that) noexcept {
-  std::string thisTemp = std::to_string(integer()) + std::to_string(that.fraction());
-  std::string thatTemp = std::to_string(that.integer()) + std::to_string(that.fraction());
+  // std::string thisTemp = std::to_string(integer()) + std::to_string(that.fraction());
+  // std::string thatTemp = std::to_string(that.integer()) + std::to_string(that.fraction());
   
-  while(thisTemp.back() == '0'){
-    thisTemp.erase(thisTemp.size()-1);
-  }
-  while(thatTemp.back() == '0'){
-    thatTemp.erase(thatTemp.size()-1);
-  }
+  // while(thisTemp.back() == '0'){
+  //   thisTemp.erase(thisTemp.size()-1);
+  // }
+  // while(thatTemp.back() == '0'){
+  //   thatTemp.erase(thatTemp.size()-1);
+  // }
 
+  // unsigned short dotPosition = decimalsCount()+that.decimalsCount();
+
+  // int aux = atoi(thisTemp.c_str())*atoi(thatTemp.c_str());
+
+  // short t_integer  = aux/pow(10, dotPosition);
+  // short t_fraction = aux-t_integer*pow(10, dotPosition);
+
+  // std::ostringstream stream;
+  // stream << t_integer << "." << t_fraction;
+  
+  // return FixedPointMachine(stream.str().c_str());
+
+  int thisTemp = format();
+  int thatTemp = that.format();
   unsigned short dotPosition = decimalsCount()+that.decimalsCount();
 
-  int aux = atoi(thisTemp.c_str())*atoi(thatTemp.c_str());
+  int aux = thisTemp*thatTemp;
 
   short t_integer  = aux/pow(10, dotPosition);
   short t_fraction = aux-t_integer*pow(10, dotPosition);
