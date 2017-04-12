@@ -14,8 +14,9 @@ private:
 
   const unsigned short MAX_FRACTION = 1000; // for 3 decimals
 
-  void fractionCorrection() noexcept;
-  unsigned short decimalsCount() const noexcept;
+  void           fractionCorrection() noexcept;
+  unsigned short decimalsCount()      const noexcept;
+  int            format()             const noexcept;
   
 public:
   FixedPointMachine()                               noexcept;
@@ -31,6 +32,7 @@ public:
   FixedPointMachine  operator + (const FixedPointMachine& that) noexcept;
   FixedPointMachine  operator - (const FixedPointMachine& that) noexcept;
   FixedPointMachine  operator * (const FixedPointMachine& that) noexcept;
+  FixedPointMachine  operator / (const FixedPointMachine& that) noexcept;
 
   bool operator == (const FixedPointMachine& that) noexcept;
   bool operator != (const FixedPointMachine& that) noexcept;

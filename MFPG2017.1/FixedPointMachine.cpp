@@ -98,18 +98,37 @@ FixedPointMachine FixedPointMachine::operator * (const FixedPointMachine& that) 
   }
 
   unsigned short dotPosition = decimalsCount()+that.decimalsCount();
-  
-  std::cout << dotPosition << std::endl;
-
-  std::cout << thisTemp << std::endl;
-  std::cout << thatTemp << std::endl;
-
 
   int aux = atoi(thisTemp.c_str())*atoi(thatTemp.c_str());
-  std::cout << aux << std::endl;
 
   short t_integer  = aux/pow(10, dotPosition);
   short t_fraction = aux-t_integer*pow(10, dotPosition);
+
+  std::ostringstream stream;
+  stream << t_integer << "." << t_fraction;
+  
+  return FixedPointMachine(stream.str().c_str());
+}
+FixedPointMachine FixedPointMachine::operator / (const FixedPointMachine& that) noexcept {
+  int thisTemp = format();
+  int thatTemp = that.format();
+
+  int temp = thisTemp/thatTemp;
+  int mod  = thisTemp%thatTemp;
+
+  unsigned short dotPosition = decimalsCount() - that.decimalsCount();
+  
+  while(mod not_eq 0){
+    temp*=10;
+    mod*=10;
+    
+    temp += mod/thatTemp;
+    mod = mod%thatTemp;
+    dotPosition++;
+  }
+
+  const short t_integer = temp/pow(10, dotPosition);
+  const unsigned short t_fraction = temp;
 
   std::ostringstream stream;
   stream << t_integer << "." << t_fraction;
@@ -153,6 +172,13 @@ unsigned short FixedPointMachine::decimalsCount() const noexcept {
   }
 
   return 3;
+}
+int FixedPointMachine::format() const noexcept {
+  int out = integer();
+  out *= pow(10, decimalsCount());
+  out += fraction()/pow(10, 3-decimalsCount());
+
+  return out;
 }
 
 // SETTERS
