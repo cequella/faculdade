@@ -1,5 +1,10 @@
 #include "FixedPointMachine.hpp"
 
+FixedPointMachine::FixedPointMachine(short t_integer,
+				     unsigned short t_fraction) noexcept :
+  m_integer(t_integer),m_fraction(t_fraction){
+  fractionCorrection();
+}
 FixedPointMachine::FixedPointMachine(const char* value) noexcept {
   if(value == nullptr or std::string(value).empty()) return;
 
@@ -24,9 +29,16 @@ FixedPointMachine::FixedPointMachine(const char* value) noexcept {
     unsigned short decimal =
       static_cast<unsigned short>( sFraction.find(std::to_string(m_fraction)) );
 
-    m_fraction *= pow(10, fmax(3-decimal, 0));
+    m_fraction *= pow(10, fmax(2-decimal, 0));
   }
     std::cout << m_integer << std::endl << m_fraction << std::endl;
+}
+
+void FixedPointMachine::fractionCorrection() noexcept {
+  while(m_fraction > MAX_FRACTION){
+    m_fraction -= MAX_FRACTION;
+    m_integer++;
+  }
 }
 
 // SETTERS
@@ -35,4 +47,5 @@ void FixedPointMachine::integer(short t_integer) noexcept {
 }
 void FixedPointMachine::fraction(unsigned short t_fraction) noexcept {
   m_fraction = t_fraction;
+  fractionCorrection();
 }
