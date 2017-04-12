@@ -43,12 +43,12 @@ public:
 				    const FixedPointMachine& that) {
     os << that.m_integer << ".";
 
-    if(that.m_fraction > 0 and that.m_fraction < 10) {
+    if(that.m_fraction < 10) {
       os << "00" << that.m_fraction;
     } else if (that.m_fraction >= 10 and that.m_fraction < 100) {
-      os << "0" << that.m_fraction/10;
+      os << "0" << that.m_fraction;
     } else {
-      os << that.m_fraction/100;
+      os << that.m_fraction;
     }
     
     return os;

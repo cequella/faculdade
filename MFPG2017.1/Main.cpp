@@ -15,8 +15,10 @@ int main(int, char** argv){
     cout << lhs << "+" << rhs << "=" << lhs+rhs << endl;
   } else if(operation == "-") {
     cout << lhs << "-" << rhs << "=" << lhs-rhs << endl;
-  } else if(operation == "*") {
-    cout << "ON DEMAND" << endl;
+  } else if(operation == ".") {
+    FixedPointMachine aux = lhs*rhs;
+    cout << lhs << "*" << rhs << "=" << aux << endl;
+    cout << aux.integer() << " " << aux.fraction() << endl;
   } else if(operation == "/") {
     cout << "ON DEMAND" << endl;
   }
