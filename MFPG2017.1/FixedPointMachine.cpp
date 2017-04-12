@@ -89,16 +89,17 @@ FixedPointMachine FixedPointMachine::operator - (const FixedPointMachine& that) 
 FixedPointMachine FixedPointMachine::operator * (const FixedPointMachine& that) noexcept {
   std::string thisTemp = std::to_string(integer()) + std::to_string(that.fraction());
   std::string thatTemp = std::to_string(that.integer()) + std::to_string(that.fraction());
-  unsigned short dotPosition = 0;
   
   while(thisTemp.back() == '0'){
     thisTemp.erase(thisTemp.size()-1);
-    dotPosition++;
   }
   while(thatTemp.back() == '0'){
     thatTemp.erase(thatTemp.size()-1);
-    dotPosition++;
   }
+
+  unsigned short dotPosition = decimalsCount()+that.decimalsCount();
+  
+  std::cout << dotPosition << std::endl;
 
   std::cout << thisTemp << std::endl;
   std::cout << thatTemp << std::endl;
@@ -142,6 +143,16 @@ bool FixedPointMachine::operator < (const FixedPointMachine& that) noexcept {
 bool FixedPointMachine::operator <= (const FixedPointMachine& that) noexcept {
   return (*this < that
 	  or (*this == that));
+}
+
+unsigned short FixedPointMachine::decimalsCount() const noexcept {
+  if(fraction()%100 == 0) {
+    return 1;
+  } else if(fraction()%10 == 0) {
+    return 2;
+  }
+
+  return 3;
 }
 
 // SETTERS
