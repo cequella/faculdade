@@ -29,6 +29,7 @@ public:
   FixedPointMachine& operator = (FixedPointMachine&& that)      noexcept;
   FixedPointMachine  operator + (const FixedPointMachine& that) noexcept;
   FixedPointMachine  operator - (const FixedPointMachine& that) noexcept;
+  FixedPointMachine  operator * (const FixedPointMachine& that) noexcept;
 
   bool operator == (const FixedPointMachine& that) noexcept;
   bool operator != (const FixedPointMachine& that) noexcept;

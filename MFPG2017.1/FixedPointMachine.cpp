@@ -35,15 +35,16 @@ FixedPointMachine::FixedPointMachine(const char* value) noexcept :
   //Fraction part
   if(dotPosition not_eq std::string::npos){
     std::string sFraction = sValue.substr(++dotPosition);
-    if(sFraction.size() > 3) sFraction = sFraction.substr(0,2);
-    sscanf(sFraction.c_str(), "%hu", &m_fraction);
+    if(sFraction.size() > 3) sFraction = sFraction.substr(0,3);
+    while(sFraction.size() < 3) sFraction = "0"+sFraction;
 
-    unsigned short decimal =
-      static_cast<unsigned short>( sFraction.find(std::to_string(m_fraction)) );
-
-    m_fraction *= pow(10, fmax(2-decimal, 0));
+    for(unsigned short it=0; it<3; it++){
+      std::string aux = sFraction.substr(it, 1);
+      std::cout << aux << std::endl;
+      const int temp = atoi(aux.c_str());
+      m_fraction += temp*pow(10, 2-it);
+    }
   }
-    std::cout << m_integer << std::endl << m_fraction << std::endl;
 }
 
 void FixedPointMachine::fractionCorrection() noexcept {
