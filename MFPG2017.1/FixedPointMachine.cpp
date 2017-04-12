@@ -35,13 +35,14 @@ FixedPointMachine::FixedPointMachine(const char* value) noexcept :
   //Fraction part
   if(dotPosition not_eq std::string::npos){
     std::string sFraction = sValue.substr(++dotPosition);
-    if(sFraction.size() > 3) sFraction = sFraction.substr(0,3);
-    while(sFraction.size() < 3) sFraction = "0"+sFraction;
+    if(sFraction.size() > 3) {
+      sFraction = sFraction.substr(0,3);
+    } else {
+      while(sFraction.size() < 3) sFraction += "0";
+    }
 
     for(unsigned short it=0; it<3; it++){
-      std::string aux = sFraction.substr(it, 1);
-      std::cout << aux << std::endl;
-      const int temp = atoi(aux.c_str());
+      const int temp = atoi( sFraction.substr(it, 1).c_str() );
       m_fraction += temp*pow(10, 2-it);
     }
   }
@@ -85,6 +86,34 @@ FixedPointMachine FixedPointMachine::operator - (const FixedPointMachine& that) 
 
   return FixedPointMachine(t_integer, t_fraction);
 }
+FixedPointMachine FixedPointMachine::operator * (const FixedPointMachine& that) noexcept {
+  std::string thisTemp = std::to_string(integer()) + std::to_string(that.fraction());
+  std::string thatTemp = std::to_string(that.integer()) + std::to_string(that.fraction());
+  
+  std::cout << thisTemp << std::endl;
+  std::cout << thatTemp << std::endl;
+
+  unsigned short thisFraction = fraction();
+  unsigned short thatFraction = that.fraction();
+  unsigned short dotPosition = 0;
+  while(thisFraction<MAX_FRACTION){
+    dotPosition++;
+    thisFraction*=10;
+  }
+  while(thatFraction<MAX_FRACTION){
+    dotPosition++;
+    thatFraction*=10;
+  }
+  std::cout << dotPosition << std::endl;
+
+  int aux = atoi(thisTemp.c_str())*atoi(thatTemp.c_str());
+  std::cout << aux << std::endl;
+
+  short t_integer  = aux/pow(10, dotPosition);
+  short t_fraction = aux-t_integer*pow(10, dotPosition);
+
+  std::cout << t_integer << "." << t_fraction << std::endl;
+}
 
 bool FixedPointMachine::operator == (const FixedPointMachine& that) noexcept {
   return ( (integer() == that.integer())
@@ -115,12 +144,16 @@ bool FixedPointMachine::operator <= (const FixedPointMachine& that) noexcept {
 }
 
 // SETTERS
-void FixedPointMachine::integer(short t_integer) noexcept {
+FixedPointMachine& FixedPointMachine::integer(short t_integer) noexcept {
   m_integer = t_integer;
+
+  return *this;
 }
-void FixedPointMachine::fraction(unsigned short t_fraction) noexcept {
+FixedPointMachine& FixedPointMachine::fraction(unsigned short t_fraction) noexcept {
   m_fraction = t_fraction;
   fractionCorrection();
+
+  return *this;
 }
 
 // GETTERS

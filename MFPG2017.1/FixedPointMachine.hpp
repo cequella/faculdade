@@ -55,8 +55,8 @@ public:
   }
 
   // Setters
-  void integer(short t_integer)            noexcept;
-  void fraction(unsigned short t_fraction) noexcept;
+  FixedPointMachine& integer(short t_integer)            noexcept;
+  FixedPointMachine& fraction(unsigned short t_fraction) noexcept;
 
   // Getters
   short          integer() const noexcept;
