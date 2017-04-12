@@ -9,23 +9,34 @@
 
 class FixedPointMachine {
 private:
-  short          m_integer  = 0;
-  unsigned short m_fraction = 0;
+  short          m_integer;
+  unsigned short m_fraction;
 
   const unsigned short MAX_FRACTION = 1000; // for 3 decimals
-
-  // Setters
-  void integer(short t_integer)            noexcept;
-  void fraction(unsigned short t_fraction) noexcept;
 
   void fractionCorrection() noexcept;
   
 public:
-  FixedPointMachine()                          noexcept;
+  FixedPointMachine()                               noexcept;
   FixedPointMachine(short         t_integer,
-		    unsigned short t_fraction) noexcept;
-  FixedPointMachine(const char* value)         noexcept;
+		    unsigned short t_fraction)      noexcept;
+  FixedPointMachine(const char* value)              noexcept;
+  FixedPointMachine(const FixedPointMachine& that)  noexcept;
+  FixedPointMachine(FixedPointMachine&& that)       noexcept;
 
+  // Operators
+  FixedPointMachine& operator = (const FixedPointMachine& that) noexcept;
+  FixedPointMachine& operator = (FixedPointMachine&& that)      noexcept;
+  FixedPointMachine  operator + (const FixedPointMachine& that) noexcept;
+  FixedPointMachine  operator - (const FixedPointMachine& that) noexcept;
+
+  bool operator == (const FixedPointMachine& that) noexcept;
+  bool operator != (const FixedPointMachine& that) noexcept;
+  bool operator >  (const FixedPointMachine& that) noexcept;
+  bool operator >= (const FixedPointMachine& that) noexcept;
+  bool operator <  (const FixedPointMachine& that) noexcept;
+  bool operator <= (const FixedPointMachine& that) noexcept;
+  
   // Friends
   friend std::ostream& operator << (std::ostream& os,
 				    const FixedPointMachine& that) {
@@ -41,6 +52,14 @@ public:
     
     return os;
   }
+
+  // Setters
+  void integer(short t_integer)            noexcept;
+  void fraction(unsigned short t_fraction) noexcept;
+
+  // Getters
+  short          integer() const noexcept;
+  unsigned short fraction() const noexcept;
 };
 
 #endif //FIXED_POINT_MACHINE_HPP
