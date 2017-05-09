@@ -9,6 +9,7 @@ private:
   double* m_component = nullptr;
 
 public:
+  /*! Full Constructor */
   Vec<SIZE>(double t_x,
 	    double t_y ...) noexcept {
 
@@ -26,16 +27,23 @@ public:
     }
     va_end(args);
   }
-  Vec<SIZE>() noexcept {
-    m_component = new double[SIZE];
+  /*! Homogenous Constructor */
+  Vec<SIZE>(double k) noexcept {
+	m_component = new double[SIZE];
     for(unsigned int it=0; it<SIZE; it++){
-      m_component[it] = 0.0;
+      m_component[it] = k;
     }
   }
+  /*! Null-Vector Constructor */
+  Vec<SIZE>() noexcept : Vec<SIZE>(0.0){}
+  /*! Copy Constrcutor */
   Vec<SIZE>(const Vec<SIZE>& that) noexcept {
     m_component = new double[SIZE];
-    memcpy(m_component, &that.m_component, SIZE*sizeof(double));
+    for(unsigned int it=0; it<SIZE; it++){
+	  m_component[it] = that.m_component[it];
+	}
   }
+  /*! Destructor */
   ~Vec<SIZE>() noexcept {
     if(m_component not_eq nullptr){
       delete [] m_component;
@@ -43,30 +51,58 @@ public:
     }
   }
 
+  /**
+	 @name Operators
+  */
+  ///@{
+
+  /*! Copy operator */
   Vec<SIZE>& operator = (const Vec<SIZE>& that) noexcept {
-    Vec<SIZE> temp(that);
-    *this = temp;
-    return *this;
+    m_component = new double[SIZE];
+    for(unsigned int it=0; it<SIZE; it++){
+	  m_component[it] = that.m_component[it];
+	}
+	return *this;
   }
   
-  // Escalar
+  /*! Multiplication by scalar */
   template <typename T>
   Vec<SIZE> operator * (T k) const noexcept {
-    Vec<SIZE> temp = *this;
+    Vec<SIZE> out(*this);
     if(std::is_integral<T>::value and std::is_floating_point<T>::value) {
       for(unsigned int it=0; it<SIZE; it++){
-	temp.m_component[it] *= static_cast<double>(k);
+		out.m_component[it] *= static_cast<double>(k);
       }
     }
-    return temp;
+    return out;
   }
+  /*! Division by scalar */
   Vec<SIZE> operator / (double k) const noexcept;
 
-  // Vetorial
-  Vec<SIZE> operator + (const Vec<SIZE>& that) const noexcept;
-  Vec<SIZE> operator - (const Vec<SIZE>& that) const noexcept;
+  /*! Vector Addition */
+  Vec<SIZE> operator + (const Vec<SIZE>& that) const noexcept {
+	Vec<SIZE> out(that);
+	for(unsigned int it=0; it<SIZE; it++){
+	  out.m_component[it] += m_component[it];
+	}
 
-  // Friend
+	return out;
+  }
+  /*! Vector Subtraction */
+  Vec<SIZE> operator - (const Vec<SIZE>& that) const noexcept {
+	return *this + (-that);
+  }
+  /*! Vector Invertion */
+  Vec<SIZE> operator - () const noexcept {
+	Vec<SIZE> out = *this;
+
+	for(unsigned int it=0; it<SIZE; it++){
+	  out.m_component[it] = -out.m_component[it];
+	}
+
+	return out;
+  }
+  /*! Vector Transcription */
   friend std::ostream& operator << (std::ostream& os, const Vec<SIZE>& that) noexcept {
     os << "V[" << SIZE << "] = {";
     for(unsigned int it=0; it<SIZE; it++){
@@ -76,8 +112,24 @@ public:
     os << "}";
     return os;
   }
+  ///@}
 
-  // Outros
+  /**
+	 @name Getter
+  */
+  ///@{
+  double* array() const noexcept{
+	return m_component;
+  }
+  ///@}
+
+  
+  /**
+	 @name Others
+  */
+  ///@{
+
+  /*! Dot Product */
   double dot(Vec<SIZE> that) const noexcept {
     double out = 0.0;
     for(unsigned int it=0; it<SIZE; it++){
@@ -85,11 +137,13 @@ public:
     }
     return out;
   }
+  /*! Cross Product */
   Vec<SIZE+1> cross(Vec<SIZE> that) const noexcept {
     Vec<SIZE+1> out;
 
     return out;
   }
+  /*! Length/Module of the vector */
   double mod() const noexcept {
     double out = 0.0;
     for(unsigned int it=0; it<SIZE; it++){
@@ -98,6 +152,7 @@ public:
 
     return sqrt(out);
   }
+  /*! Set vector lenght to 1 */
   void normalize() noexcept {
     double aux = mod();
     if(aux == 0) return; // Avoid null-vector normalization
@@ -106,9 +161,10 @@ public:
       m_component[it]/=aux;
     }
   }
+  /*! Get angle between two vectors */
   double angle(Vec<SIZE> that) const noexcept;
+  ///@}
 };
-
 using Vec2 = Vec<2>;
 using Vec3 = Vec<3>;
 using Vec4 = Vec<4>;
@@ -116,9 +172,10 @@ using Vec4 = Vec<4>;
 using namespace std;
 
 int main() {
+  Vec3 nulo;
   Vec3 teste(2.0, 4.0, 4.0);
 
-  cout << teste << endl;
+  cout << -teste << endl;
   cout << "Mod: " << teste.mod() << endl;
   
   return 0;
