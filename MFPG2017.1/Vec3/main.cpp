@@ -3,8 +3,6 @@
 #include <cstring>
 #include <cmath>
 
-using namespace std;
-
 template <unsigned short SIZE=2>
 class Vec {
 private:
@@ -17,14 +15,14 @@ public:
     m_component = new double[SIZE];
     
     // SET FIRST 2
-    m_component[0] = t_x;
-    m_component[1] = t_y;
+    m_component[0]    = t_x;
+    m_component[1]    = t_y;
     
     // ANOTHER
     va_list args;
     va_start(args, t_y);
-    for(unsigned int it=0; it<SIZE-2; it++){
-      m_component[it+2] = va_arg(args, double);
+    for(unsigned int it=2; it<SIZE; it++){
+      m_component[it] = va_arg(args, double);
     }
     va_end(args);
   }
@@ -52,14 +50,21 @@ public:
   }
   
   // Escalar
-  Vec<SIZE> operator * (double k) const noexcept;
+  template <typename T>
+  Vec<SIZE> operator * (T k) const noexcept {
+    Vec<SIZE> temp = *this;
+    if(std::is_integral<T>::value and std::is_floating_point<T>::value) {
+      for(unsigned int it=0; it<SIZE; it++){
+	temp.m_component[it] *= static_cast<double>(k);
+      }
+    }
+    return temp;
+  }
   Vec<SIZE> operator / (double k) const noexcept;
 
   // Vetorial
   Vec<SIZE> operator + (const Vec<SIZE>& that) const noexcept;
   Vec<SIZE> operator - (const Vec<SIZE>& that) const noexcept;
-  Vec<SIZE> operator * (const Vec<SIZE>& that) const noexcept;
-  Vec<SIZE> operator / (const Vec<SIZE>& that) const noexcept;
 
   // Friend
   friend std::ostream& operator << (std::ostream& os, const Vec<SIZE>& that) noexcept {
@@ -73,6 +78,18 @@ public:
   }
 
   // Outros
+  double dot(Vec<SIZE> that) const noexcept {
+    double out = 0.0;
+    for(unsigned int it=0; it<SIZE; it++){
+      out += m_component[it]*that.m_component[it];
+    }
+    return out;
+  }
+  Vec<SIZE+1> cross(Vec<SIZE> that) const noexcept {
+    Vec<SIZE+1> out;
+
+    return out;
+  }
   double mod() const noexcept {
     double out = 0.0;
     for(unsigned int it=0; it<SIZE; it++){
@@ -83,6 +100,8 @@ public:
   }
   void normalize() noexcept {
     double aux = mod();
+    if(aux == 0) return; // Avoid null-vector normalization
+    
     for(unsigned int it=0; it<SIZE; it++){
       m_component[it]/=aux;
     }
@@ -90,12 +109,17 @@ public:
   double angle(Vec<SIZE> that) const noexcept;
 };
 
+using Vec2 = Vec<2>;
 using Vec3 = Vec<3>;
+using Vec4 = Vec<4>;
+
+using namespace std;
 
 int main() {
-  Vec3 teste;
+  Vec3 teste(2.0, 4.0, 4.0);
 
-  std::cout << teste << std::endl;
+  cout << teste << endl;
+  cout << "Mod: " << teste.mod() << endl;
   
   return 0;
 }
