@@ -11,6 +11,7 @@ Vector2D.prototype.abs = function(){
 }
 Vector2D.prototype.normalize = function(){
     var abs = this.abs();
+    if(abs == 0.0) return this;
     this.x /= abs;
     this.y /= abs;
     return this;

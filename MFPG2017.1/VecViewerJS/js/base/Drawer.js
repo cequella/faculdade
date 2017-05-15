@@ -54,11 +54,33 @@ Drawer.prototype.line = function(startX, startY, endX, endY){
     this.context.stroke()
     this.context.closePath();
 }
-Drawer.prototype.text = function(text, font, startX, startY, stroke=true){
+Drawer.prototype.text = function(text, font, startX, startY, stroke="STROKE"){
     this.context.font = font;
-    if(stroke){
-	this.context.strokeText(text, startX, startY);
-    } else {
+    if(stroke=="FILL"){
 	this.context.fillText(text, startX, startY);
+    } else {
+	this.context.strokeText(text, startX, startY);
     }
+}
+Drawer.prototype.arrow = function(startX, startY, endX, endY) {
+    var size = 20;
+    var angle = Math.PI/2;
+    var vec  = new Vector2D(endX-startX, endY-startY);
+    vec.normalize().product(size);
+    
+    // Body
+    this.context.beginPath();
+    this.context.moveTo(startX,startY);
+    this.context.lineTo(endX,endY);
+    this.context.stroke()
+    this.context.closePath();
+
+    // Head
+    this.context.beginPath();
+    this.context.moveTo(endX, endY);
+    this.context.lineTo(endX-vec.get().x*Math.sin(angle), endY-vec.get().y*Math.cos(angle));
+    this.context.moveTo(endX, endY);
+    this.context.lineTo(endX-vec.get().x*Math.cos(angle), endY-vec.get().y*Math.sin(angle));
+    this.context.stroke()
+    this.context.closePath();
 }

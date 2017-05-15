@@ -4,6 +4,11 @@ function App(canvasId) {
     this.drawer = new Drawer(canvasId);
     this.cursor = null;
 
+    //temp
+    this.content = [{startX: 100, startY: 100, endX: 300, endY: 400}/*,
+		    {startX: 300, startY: 400, endX: 100, endY: 300},
+		    {startX: 100, startY: 300, endX: 400, endY: 500}*/]; 
+
     //GAMBIARRA! ODEIO JAVASCRIPT
     var wtf = this;
     document.addEventListener("mousemove", function(event){
@@ -17,17 +22,16 @@ App.prototype.draw = function() {
     if(this.cursor == null) return;
     
     this.clearCanvas();
-    var drawer = this.drawer;
-    var cursor = this.cursor;
+    var drawer  = this.drawer;
+    var content = this.cursor;
 
-    var aux = new Vector2D(cursor.x, cursor.y);
-    aux.normalize().product(15.0);
-    normal = new Vector2D(cursor.x/2+aux.get().y, cursor.y/2-aux.get().x); //o vetor perpendicular a (x,y) é (y, -x)
-
+    // Draw all saved positions
+    /*drawer.strokeStyle("blue");
+    content.forEach(function(item, index){
+	drawer.arrow(item.startX, item.startY,
+		     item.endX, item.endY);
+		     });*/
     drawer.strokeStyle("blue");
-    drawer.line(0,0,
-		cursor.x,cursor.y);
-    drawer.strokeStyle("red");
-    drawer.line(cursor.x/2, cursor.y/2,
-		normal.get().x, normal.get().y);
+    drawer.arrow(0.0, 0.0,
+		 content.x, content.y);
 }
