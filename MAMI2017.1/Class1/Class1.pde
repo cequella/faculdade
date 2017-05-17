@@ -17,7 +17,7 @@
 
 // START CONFIGURATION
 final float LENGTH        = 50;
-final int   COUNT         = 5;
+final int   COUNT_LIMIT   = 10;
 final float STROKE_WEIGHT = 20.0;
 final color STROKE_COLOR  = color(255,100);
 
@@ -29,14 +29,14 @@ void setup() {
   strokeWeight(STROKE_WEIGHT);
   stroke(STROKE_COLOR);
   
-  segment = new Segment[COUNT];           // Start array of Segments
+  segment = new Segment[COUNT_LIMIT];           // Start array of Segments
   segment[0] = new Segment(null, LENGTH); // Initialize the first segment.
 }
 
 void mouseWheel(MouseEvent event) {
   int temp = (event.getCount()>0)?-1:1; // If scroll-down, set temp to -1. Else, set to 1.
   
-  if(temp==1 && currentCount<COUNT){ // Create new segment and update currentCount
+  if(temp==1 && currentCount<COUNT_LIMIT){ // Create new segment and update currentCount
     segment[currentCount] = new Segment(segment[currentCount-1], LENGTH);
     currentCount += temp;
   } else if(temp == -1 && currentCount>1){ // Remove last segment and update currentCount
