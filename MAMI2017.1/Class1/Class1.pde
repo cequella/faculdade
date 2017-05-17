@@ -15,62 +15,31 @@
  
  */
 
-class Segment {
-  private float x, y, segLength;
-  private Segment forward;
-  
-  public Segment(Segment forward, float segLength){
-    this.forward = forward;
-    this.segLength = segLength;
-  }
-  
-  private void draw(float x, float y) {
-    float dx = x - this.x;
-    float dy = y - this.y;
-    float angle = atan2(dy, dx);  
-    this.x = x - cos(angle) * this.segLength;
-    this.y = y - sin(angle) * this.segLength;
-    segment(this.x, this.y, angle);
-  }
-  private void draw() {
-    float dx = forward.x - this.x;
-    float dy = forward.y - this.y;
-    float angle = atan2(dy, dx);  
-    this.x = forward.x - cos(angle) * this.segLength;
-    this.y = forward.y - sin(angle) * this.segLength;
-    segment(this.x, this.y, angle);
-  }
-
-  private void segment(float x, float y, float a) {
-    pushMatrix();
-    translate(x, y);
-    rotate(a);
-    line(0, 0, segLength, 0);
-    popMatrix();
-  }
-};
+// START CONFIGURATION
+final float LENGTH        = 50;
+final int   COUNT         = 5;
+final float STROKE_WEIGHT = 20.0;
+final color STROKE_COLOR  = color(255,100);
 
 Segment segment[];
-final float LENGTH = 50;
-final int COUNT = 5;
-int currentCount = 1;
+int     currentCount  = 1;
 
 void setup() {
   size(640, 360);
-  strokeWeight(20.0);
-  stroke(255, 100);
+  strokeWeight(STROKE_WEIGHT);
+  stroke(STROKE_COLOR);
   
-  segment = new Segment[COUNT];
-  segment[0] = new Segment(null, LENGTH);
+  segment = new Segment[COUNT];           // Start array of Segments
+  segment[0] = new Segment(null, LENGTH); // Initialize the first segment.
 }
 
 void mouseWheel(MouseEvent event) {
-  int temp = (event.getCount()>0)?-1:1;
+  int temp = (event.getCount()>0)?-1:1; // If scroll-down, set temp to -1. Else, set to 1.
   
-  if(temp==1 && currentCount<COUNT){
+  if(temp==1 && currentCount<COUNT){ // Create new segment and update currentCount
     segment[currentCount] = new Segment(segment[currentCount-1], LENGTH);
     currentCount += temp;
-  } else if(temp == -1 && currentCount>1){
+  } else if(temp == -1 && currentCount>1){ // Remove last segment and update currentCount
     segment[currentCount-1] = null;
     currentCount += temp;
   }
@@ -79,8 +48,8 @@ void mouseWheel(MouseEvent event) {
 void draw() {
   background(0);
   
-  segment[0].draw(mouseX, mouseY);
-  for(int i=1; i<currentCount; i++){
+  segment[0].draw(mouseX, mouseY); // Draw first segment in mouse coord
+  for(int i=1; i<currentCount; i++){ // Draw the rest
     segment[i].draw();
   }
 }
