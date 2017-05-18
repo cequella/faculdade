@@ -10,31 +10,10 @@ function App(canvasId) {
     //GAMBIARRA! ODEIO JAVASCRIPT
     var wtf = this;
     document.addEventListener("mousemove", function(event){
-	var position = wtf.drawer.getMousePos(event);
-	if(position == null) return;
-
-	var length = wtf.content.length
-	if(length>0){
-	    var last = wtf.content[length-1];
-	    wtf.cursor = {startX: last.endX, startY: last.endY, endX: position.x, endY: position.y};
-	} else {
-	    wtf.cursor = {startX: 0, startY: 0, endX: position.x, endY: position.y};
-	}
+	wtf.setCursor(event);
     });
     document.addEventListener("click", function(event){
-	var position = wtf.drawer.getMousePos(event);
-
-	if(position==null) return;
-	
-	var length = wtf.content.length
-	if(length>0){
-	    var last = wtf.content[length-1];
-	    wtf.content.push(wtf.cursor);
-	} else {
-	    wtf.content.push({startX: 0, startY: 0, endX: position.x, endY: position.y});
-	}
-
-	console.log(wtf.content);
+	wtf.updateContent(event);
     });
 }
 App.prototype = Object.create(Screen.prototype);
@@ -74,4 +53,34 @@ App.prototype.draw = function() {
 		     "result");
     }
     
+}
+App.prototype.setCursor = function(event){
+    var position = this.drawer.getMousePos(event);
+    if(position == null) return;
+
+    var length = this.content.length
+    if(length>0){
+	var last = this.content[length-1];
+	this.cursor = {startX: last.endX, startY: last.endY, endX: position.x, endY: position.y};
+    } else {
+	this.cursor = {startX: 0, startY: 0, endX: position.x, endY: position.y};
+    }
+}
+App.prototype.updateContent = function(event){
+    var position = this.drawer.getMousePos(event);
+
+    if(position==null) return;
+    
+    var length = this.content.length
+    if(length>0){
+	var last = this.content[length-1];
+	this.content.push(this.cursor);
+    } else {
+	this.content.push({startX: 0, startY: 0, endX: position.x, endY: position.y});
+    }
+
+    console.log(this.content);
+}
+App.prototype.shuffleContent = function(event) {
+
 }
