@@ -62,7 +62,7 @@ Drawer.prototype.text = function(text, font, startX, startY, stroke="STROKE"){
 	this.context.strokeText(text, startX, startY);
     }
 }
-Drawer.prototype.arrow = function(startX, startY, endX, endY) {
+Drawer.prototype.arrow = function(startX, startY, endX, endY, id=null) {
     var size = 20;
     var angle = Math.PI/2;
     var vec  = new Vector2D(endX-startX, endY-startY);
@@ -83,4 +83,11 @@ Drawer.prototype.arrow = function(startX, startY, endX, endY) {
     this.context.lineTo(endX-vec.get().x*Math.cos(angle), endY-vec.get().y*Math.sin(angle));
     this.context.stroke()
     this.context.closePath();
+
+    // Tag
+    if(id!=null){
+	this.context.fillStyle = this.context.strokeStyle;
+	this.context.font = "10px Arial";
+	this.context.fillText(id, (endX+startX)/2, (endY+startY)/2);
+    }
 }
