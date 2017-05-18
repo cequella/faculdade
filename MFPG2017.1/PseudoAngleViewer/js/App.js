@@ -46,7 +46,8 @@ App.prototype.pseudoAngle = function(){
 
     drawer.lineWidth(4)
 	.strokeStyle("red")
-	.line(drawer.centerX(-this.squareSize), drawer.centerY(this.squareSize), 100, 100);
+	.line(drawer.centerX(-this.squareSize), drawer.centerY(), drawer.centerX(-this.squareSize), this.squareSize);
+    drawer.circle(drawer.centerX(-this.squareSize), this.squareSize, 2);
 }
 App.prototype.drawCursor = function(){
     var drawer  = this.drawer;
