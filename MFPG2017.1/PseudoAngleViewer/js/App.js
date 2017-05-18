@@ -1,27 +1,63 @@
-function setup(){
-    canvas = document.getElementById("canvas");
-    context = canvas.getContext("2d");
+function App(canvasId) {
+    Screen.call(this, canvasId, 20);
 
-    var min = Math.min(canvas.width, canvas.height);
-    drawAxis(min/4);
+    this.drawer = new Drawer(canvasId);
+    this.cursor = null;
+    this.squareSize = Math.min(this.drawer.width(), this.drawer.height())/3;
+    this.square = {x: this.drawer.centerX(this.squareSize),
+		   y: this.drawer.centerY(this.squareSize),
+		   size: this.squareSize};
+
+    //GAMBIARRA! ODEIO JAVASCRIPT
+    var wtf = this;
+    document.addEventListener("mousemove", function(event){
+	wtf.setCursor(event);
+    });
 }
+App.prototype = Object.create(Screen.prototype);
+App.prototype.constructor = App;
 
-function drawAxis(size){
-    // Vertical Line
-    context.moveTo(canvas.width/2, 0);
-    context.lineTo(canvas.width/2, canvas.height);
-    
-    // Horizontal Line
-    context.moveTo(0, canvas.height/2);
-    context.lineTo(canvas.width, canvas.height/2);
+App.prototype.draw = function() {
+    this.clearCanvas();
+    var drawer  = this.drawer;
+    var content = this.content;
+    var cursor  = this.cursor;
 
-    // Draw Square
-    context.moveTo(canvas.width/2-size, canvas.height/2-size);
-    context.lineTo(canvas.width/2+size, canvas.height/2-size);
-    context.lineTo(canvas.width/2+size, canvas.height/2+size);
-    context.lineTo(canvas.width/2-size, canvas.height/2+size);
-    context.lineTo(canvas.width/2-size, canvas.height/2-size);
+    this.drawGrid();
+    this.drawCursor();
+    this.pseudoAngle();
+}
+App.prototype.drawGrid = function(){
+    var drawer  = this.drawer;
+
+    drawer.strokeStyle("black").lineWidth(1);
     
-    // Draw Line
-    context.stroke();
+    // Vertical line
+    drawer.line(drawer.width()/2, 0, drawer.width()/2, drawer.height());
+
+    // Horizontal line
+    drawer.line(0, drawer.height()/2, drawer.width(), drawer.height()/2);
+
+    // Box
+    drawer.rect(this.square.x, this.square.y, this.square.size, this.square.size);
+}
+App.prototype.pseudoAngle = function(){
+    var drawer  = this.drawer;
+
+    drawer.lineWidth(4)
+	.strokeStyle("red")
+	.line(drawer.centerX(-this.squareSize), drawer.centerY(this.squareSize), 100, 100);
+}
+App.prototype.drawCursor = function(){
+    var drawer  = this.drawer;
+    var cursor  = this.cursor;
+
+    if(drawer != null && cursor != null){
+	drawer.strokeStyle("blue").lineWidth(1);
+	drawer.line(drawer.centerX(), drawer.centerY(), this.cursor.x, this.cursor.y);
+    }
+}
+App.prototype.setCursor = function(event){
+    var temp = this.drawer.getMousePos(event);
+    if(temp!=null) this.cursor = temp;
 }

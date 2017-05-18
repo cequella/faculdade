@@ -82,5 +82,5 @@ App.prototype.updateContent = function(event){
     console.log(this.content);
 }
 App.prototype.shuffleContent = function(event) {
-
+    
 }
