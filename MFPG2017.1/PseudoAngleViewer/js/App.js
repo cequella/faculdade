@@ -7,6 +7,7 @@ function App(canvasId) {
     this.square = {x: this.drawer.centerX(this.squareSize),
 		   y: this.drawer.centerY(this.squareSize),
 		   size: this.squareSize};
+    this.pa = 0.0;
 
     //GAMBIARRA! ODEIO JAVASCRIPT
     var wtf = this;
@@ -25,7 +26,7 @@ App.prototype.draw = function() {
 
     this.drawGrid();
     this.drawCursor();
-    this.pseudoAngle();
+    this.pseudoAngle(-this.pa); //TODO Corrigir essa chibata
 }
 App.prototype.drawGrid = function(){
     var drawer  = this.drawer;
@@ -41,12 +42,11 @@ App.prototype.drawGrid = function(){
     // Box
     drawer.rect(this.square.x, this.square.y, this.square.size, this.square.size);
 }
-App.prototype.pseudoAngle = function(){
+App.prototype.pseudoAngle = function(value){
     var   drawer = this.drawer;
     const size   = this.squareSize;
     const hSize  = this.squareSize/2.0;
 
-    var value = -0.8;
     if(value >= 8.0){
 	value = value%8.0;
     } else if(value < 0.0){
@@ -56,7 +56,7 @@ App.prototype.pseudoAngle = function(){
 
     drawer.lineWidth(4).strokeStyle("red");
     
-    if(value>0){
+    if(value>=0){
 	const temp = Math.min(1.0, value);
 	
 	drawer.line(drawer.centerX(-size),
@@ -67,6 +67,11 @@ App.prototype.pseudoAngle = function(){
 	if(value <= 1){
 	    drawer.circle(drawer.centerX(-size),
 			  drawer.centerY()-hSize*temp, 2);
+	    drawer.text(this.pa.toString(),
+			"14px Arial",
+			drawer.centerX(-size),
+			drawer.centerY()-hSize*temp,
+		       "FILL");
 	}
     } else return;
     if(value>1){
@@ -168,6 +173,43 @@ App.prototype.drawCursor = function(){
     if(drawer != null && cursor != null){
 	drawer.strokeStyle("blue").lineWidth(1);
 	drawer.line(drawer.centerX(), drawer.centerY(), this.cursor.x, this.cursor.y);
+
+	//----------------------------------
+	var dx = this.cursor.x - drawer.centerX();
+	var dy = this.cursor.y - drawer.centerY();
+	var adx = (dx < 0) ? -dx : dx;
+	var ady = (dy < 0) ? -dy : dy;
+	
+	var code = (adx < ady) ? 1 : 0;
+	if (dx < 0)  code += 2;
+	if (dy < 0)  code += 4;
+
+	switch (code){
+        case 0:
+	    this.pa = (dx==0) ? 0 : ady/adx;  /* [  0, 45] */
+	    break;
+        case 1:
+	    this.pa = (2.0 - (adx/ady));      /* ( 45, 90] */
+	    break;
+        case 3:
+	    this.pa = (2.0 + (adx/ady));      /* ( 90,135) */
+	    break;
+        case 2:
+	    this.pa = (4.0 - (ady/adx));      /* [135,180] */
+	    break;
+        case 6:
+	    this.pa = (4.0 + (ady/adx));      /* (180,225] */
+	    break;
+        case 7:
+	    this.pa = (6.0 - (adx/ady));      /* (225,270) */
+	    break;
+        case 5:
+	    this.pa = (6.0 + (adx/ady));      /* [270,315) */
+	    break;
+        case 4:
+	    this.pa = (8.0 - (ady/adx));      /* [315,360) */
+	    break;
+	}
     }
 }
 App.prototype.setCursor = function(event){
