@@ -23,31 +23,33 @@ public:
 
   /*! Ostream operator << */
   friend std::ostream& operator << (std::ostream& os,
-									const Matrix& that
-									) noexcept {
-	os << "{";
-	for(unsigned short i=0; i<M_SIZE; i++){ // lines
-	  os << "{";
-	  for(unsigned short j=0; j<M_SIZE; j++){ // collumns
-		os << that.m_value[i][j];
-		if(j not_eq M_SIZE-1) os << ", ";
-	  }
-	  os << "}";
+				    const Matrix& that
+				    ) noexcept {
+    os << "{";
+    for(unsigned short i=0; i<M_SIZE; i++){ // lines
+      os << "{";
+      for(unsigned short j=0; j<M_SIZE; j++){ // collumns
+	os << that.m_value[i][j];
+	if(j not_eq M_SIZE-1) os << ", ";
+      }
+      os << "}";
 	  
-	  if(i not_eq M_SIZE-1) os << ", ";
-	}
-	os << "}";
+      if(i not_eq M_SIZE-1) os << ", ";
+    }
+    os << "}";
 
-	return os;
+    return os;
   }
 
+  //---------------------------------------------------------------------------------------//
+  
   static Matrix identity()              noexcept;
   static Matrix translation(double x,
-							double y,
-							double z)   noexcept;
+			    double y,
+			    double z)   noexcept;
   static Matrix scale(double x,
-					  double y,
-					  double z)         noexcept;
+		      double y,
+		      double z)         noexcept;
   static Matrix scale(double factor)    noexcept;
   static Matrix rotationX(double angle) noexcept;
   static Matrix rotationY(double angle) noexcept;
