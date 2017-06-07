@@ -1,112 +1,158 @@
 #include "Matrix.hpp"
 
-Matrix::Matrix(double t_value ...) noexcept {
+template <unsigned short W, unsigned short H>
+Matrix<W,H>::Matrix(double t_value ...) noexcept :
+					 m_value(new double[W*H]),
+					 m_width(W),
+					 m_height(H){
   va_list arg;
   va_start(arg, t_value);
 
-  m_value[0][0] = t_value;
-  for(unsigned short i=0; i<M_SIZE; i++){
-    for(unsigned short j=(i==0)?1:0; j<M_SIZE; j++){
-      m_value[i][j] = va_arg(arg, double);
-    }
+  m_value[0] = t_value;
+  for(unsigned short i=0; i<W*H; i++){
+    m_value[i] = va_arg(arg, double);
   }
   va_end(arg);
 }
 //--------------------------------------------------
 
-Matrix::Matrix(Vec3 v1, Vec3 v2, Vec3 v3) noexcept {
-  for(unsigned short i=0; i<M_SIZE; i++) {
-    m_value[0][i] = v1.array()[i];
-    m_value[1][i] = v2.array()[i];
-    m_value[2][i] = v3.array()[i];
+template <unsigned short W, unsigned short H>
+Matrix<W, H>::Matrix() noexcept  :
+		       m_value(new double[W*H]),
+		       m_width(W),
+		       m_height(H){
+  for(unsigned short i=0; i<W*H; i++){
+    m_value[i] = ( i%(W+1) == 0 ) ? 1.0f : 0.0f;
   }
 }
 //--------------------------------------------------
 
-Matrix::Matrix() noexcept {
-  for(unsigned short i=0; i<M_SIZE; i++){
-    for(unsigned short j=0; j<M_SIZE; j++){
-      m_value[i][j] = (i==j) ? 1.0f : 0.0f;
+template<>
+std::ostream& operator << (std::ostream& os,
+			   const Matrix<>& that
+			   ) noexcept {
+  os << "{";
+  for(unsigned short i=0; i<that.m_width; i++){ // lines
+    os << "{";
+    for(unsigned short j=0; j<that.m_height; j++){ // collumns
+      os << that.m_value[i][j];
+      if(j not_eq W2-1) os << ", ";
     }
+    os << "}";
+    
+    if(i not_eq H2-1) os << ", ";
   }
+  os << "}";
+  
+  return os;
 }
 //--------------------------------------------------
 
-Matrix Matrix::identity() noexcept {
-  return Matrix();
+template <unsigned short W, unsigned short H>
+unsigned shor Matrix<W, H>::width() const noexcept {
+  return m_width;
 }
 //--------------------------------------------------
 
-Matrix Matrix::translation(double x,
+template <unsigned short W, unsigned short H>
+unsigned shor Matrix<W, H>::height() const noexcept {
+  return m_height;
+}
+//--------------------------------------------------
+
+template <unsigned short W, unsigned short H>
+unsigned shor Matrix<W, H>::size() const noexcept {
+  return m_width*m_height;
+}
+//--------------------------------------------------
+
+
+template <unsigned short W, unsigned short H>
+Matrix<W,H> Matrix<W,H>::identity() noexcept {
+  return Matrix<W,H>();
+}
+//--------------------------------------------------
+
+template <unsigned short W, unsigned short H>
+Matrix<W,H> Matrix<W,H>::translation(double x,
 			   double y,
 			   double z) noexcept {
-  return Matrix(); //TODO
+  return Matrix<3,3>(); //TODO
 }
 //--------------------------------------------------
 
-Matrix Matrix::scale(double x,
+template<>
+Matrix<3,3> Matrix<3,3>::scale(double x,
 		     double y,
 		     double z
 		     ) noexcept {
-  return Matrix(x,   0.0, 0.0,
-		0.0, y,   0.0,
-		0.0, 0.0, z);
+  return Matrix<3,3>(x,   0.0, 0.0,
+		     0.0, y,   0.0,
+		     0.0, 0.0, z);
 }
 //--------------------------------------------------
 
-Matrix Matrix::scale(double factor) noexcept {
-  return Matrix(factor, 0.0,    0.0,
-		0.0,    factor, 0.0,
-		0.0,    0.0,    factor);
+template<>
+Matrix<3,3> Matrix<3,3>::scale(double factor) noexcept {
+  return Matrix<3,3>(factor, 0.0,    0.0,
+		     0.0,    factor, 0.0,
+		     0.0,    0.0,    factor);
 }
 //--------------------------------------------------
 
-Matrix Matrix::rotationX(double angle) noexcept {
+template<>
+Matrix<3,3> Matrix<3,3>::rotationX(double angle) noexcept {
   const double cosAngle = cos(angle);
   const double sinAngle = sin(angle);
   
-  return Matrix(1.0, 0.0,      0.0,
-		0.0, cosAngle, -sinAngle,
-		0.0, sinAngle, cosAngle);
+  return Matrix<3,3>(1.0, 0.0,      0.0,
+		     0.0, cosAngle, -sinAngle,
+		     0.0, sinAngle, cosAngle);
 }
 //--------------------------------------------------
 
-Matrix Matrix::rotationY(double angle) noexcept {
+template<>
+Matrix<3,3> Matrix<3,3>::rotationY(double angle) noexcept {
   const double cosAngle = cos(angle);
   const double sinAngle = sin(angle);
   
-  return Matrix(cosAngle,  0.0, sinAngle,
-		0.0,       1.0, 0.0,
-		-sinAngle, 0.0, cosAngle);
+  return Matrix<3,3>(cosAngle,  0.0, sinAngle,
+		     0.0,       1.0, 0.0,
+		     -sinAngle, 0.0, cosAngle);
 }
 //--------------------------------------------------
 
-Matrix Matrix::rotationZ(double angle) noexcept {
+template<>
+Matrix<3,3> Matrix<3,3>::rotationZ(double angle) noexcept {
   const double cosAngle = cos(angle);
   const double sinAngle = sin(angle);
   
-  return Matrix(cosAngle, -sinAngle, 0.0,
-		sinAngle, cosAngle,  0.0,
-		0.0,      0.0,       1.0);
+  return Matrix<3,3>(cosAngle, -sinAngle, 0.0,
+		     sinAngle, cosAngle,  0.0,
+		     0.0,      0.0,       1.0);
 }
 //--------------------------------------------------
 
-Matrix Matrix::TRS() noexcept {
-  return Matrix();
+template<>
+Matrix<3,3> Matrix<3,3>::TRS() noexcept {
+  return Matrix<3,3>();
 }
 //--------------------------------------------------
 
-Matrix Matrix::iTRS() noexcept {
-  return Matrix();
+template<>
+Matrix<3,3> Matrix<3,3>::iTRS() noexcept {
+  return Matrix<3,3>();
 }
 //--------------------------------------------------
 
-Matrix Matrix::rotationWithCenterAt() noexcept {
-  return Matrix();
+template<>
+Matrix<3,3> Matrix<3,3>::rotationWithCenterAt() noexcept {
+  return Matrix<3,3>();
 }
 //--------------------------------------------------
 
-Matrix Matrix::scaleWithCenterAt() noexcept {
-  return Matrix();
+template<>
+Matrix<3,3> Matrix<3,3>::scaleWithCenterAt() noexcept {
+  return Matrix<3,3>();
 }
 //--------------------------------------------------

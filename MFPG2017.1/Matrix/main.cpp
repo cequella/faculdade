@@ -6,7 +6,7 @@
 using namespace std;
 
 int main(){
-  Matrix m = Matrix::rotationX(M_PI/3.0);
+  Matrix3 m = Matrix3::rotationX(M_PI/3.0);
   
   cout << m << endl;
   
