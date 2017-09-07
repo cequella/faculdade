@@ -1,0 +1,30 @@
+@charset "UTF-8";
+
+header {
+	text-align: center;
+}
+footer {
+	clear: both;
+}
+figcaption {
+	text-align: center;
+	font-style: italic;
+}
+
+.root {
+	margin-left: 5%;
+	margin-right: 5%;
+}
+.root > article {
+	float: left;
+}
+.root > article > p {
+	margin: 5px;
+}
+
+.top5 {
+	width: 50%;
+}
+.top5 > h4 {
+	text-align: center;
+}
