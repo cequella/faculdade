@@ -4,6 +4,22 @@
 
 #include "Color.h"
 
+void help(){
+  printf(
+		 "\n\nHow to use:\n"
+		 "Please execute this application using:\n"
+		 "\t./convert mode xxx yyy zzz\n"
+		 "x, y and z must be in [0..255] decimal interval. Otherwise, it will be clamped.\n\n"
+		 "Modes:\n\n"
+		 "rgb_to_hsv, rgb_to_ycbcr, \n"
+		 "hsv_to_ycbcr, hsv_to_rgb, \n"
+		 "ycbcr_to_rgb, ycbcr_to_hsv\n\n"
+		 "Example:\n"
+		 "\t./convert rgb_to_ycbcr 100 200 255\n"
+		 "It will convert {100,200,255} from RGB format to YCbCR format.\n\n"
+		 );
+}
+
 int compare(const char* str1, const char* str2, int size){
   for(int i=0; i<size; i++){
 	if(str1[i] != str2[i]) return 0;
@@ -66,8 +82,7 @@ int main(int argc, char** argv) {
 
   // Check amount of arguments
   if(argc<5){
-	printf("Please run like: mode c1 c2 c3.\n");
-	printf("[Ex: \"rgb_to_ycbcr 100 200 255\" to conver a {100,200,255} rgb to YCbCr.\n");
+	help();
 	return 1;
   }
 
