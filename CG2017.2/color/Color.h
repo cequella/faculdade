@@ -10,7 +10,7 @@ union S_COLOR {
 	unsigned char r, g, b;
   } RGB;
   struct S_HSV {
-	unsigned char h, s, b;
+	unsigned char h, s, v;
   } HSV;
   struct S_YCbCr {
 	unsigned char y, cb, cr;

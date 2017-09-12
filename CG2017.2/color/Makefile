@@ -2,10 +2,10 @@ CC= gcc
 OUT= convert
 
 all: Color.o
-	@${CC} main.c -o ${OUT} *.o
+	@${CC} -g main.c -o ${OUT} *.o
 
 Color.o: Color.c Color.h
-	@${CC} -c Color.c
+	@${CC} -g -c Color.c
 
 run:
 	@./${OUT}
