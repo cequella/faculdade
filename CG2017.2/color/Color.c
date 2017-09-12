@@ -84,6 +84,66 @@ Color hsv_to_ycbcr(const Color that) {
 Color hsv_to_rgb(const Color that) {
   Color out;
 
+  // Case saturation is 0, the color is gray
+  if(that.HSV.s == 0){
+	out.RGB.r = out.RGB.g = out.RGB.b = that.HSV.v;
+	return out;
+  }
+
+  // Set sextant
+  const short sextant = that.HSV.h/42.5; // 42.5 of 255 are equivalent to 60 of 360
+  printf("sextant= %i\n\n", sextant);
+  
+  // Set aux values
+  const float S = that.HSV.s/255.0;
+  const float C = that.HSV.h/42.5 - sextant; // Sextant decimal part
+  float p, q, t;
+  p = q = t = that.HSV.v;
+  
+  p *= (1.0 -S);
+  q *= (1.0 -(S * C));
+  t *= (1.0 -(S * (1.0-C)));
+  
+  // Convert
+  switch(sextant){
+  case 0:
+	out.RGB.r = that.HSV.v;
+	out.RGB.g = t;
+	out.RGB.b = p;
+	break;
+
+  case 1:
+	out.RGB.r = q;
+	out.RGB.g = that.HSV.v;
+	out.RGB.b = p;
+	break;
+	
+  case 2:
+	out.RGB.r = p;
+	out.RGB.g = that.HSV.v;
+	out.RGB.b = t;
+	break;
+
+  case 3:
+	out.RGB.r = p;
+	out.RGB.g = q;
+	out.RGB.b = that.HSV.v;
+	break;
+
+  case 4:
+	out.RGB.r = t;
+	out.RGB.g = p;
+	out.RGB.b = that.HSV.v;
+	break;
+
+  case 5:
+  default:
+	out.RGB.r = that.HSV.v;
+	out.RGB.g = p;
+	out.RGB.b = q;
+	break;
+  }
+  
   return out;
 }
 //-----------------------------------------------------------------------------------
