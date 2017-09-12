@@ -77,6 +77,9 @@ Color rgb_to_ycbcr(const Color that) { //ITU-R BT.2020 conversion
 Color hsv_to_ycbcr(const Color that) {
   Color out;
 
+  out = hsv_to_rgb(that);
+  out = rgb_to_ycbcr(out);
+  
   return out;
 }
 //-----------------------------------------------------------------------------------
@@ -165,6 +168,9 @@ Color ycbcr_to_rgb(const Color that) {
 
 Color ycbcr_to_hsv(const Color that) {
   Color out;
+
+  out = ycbcr_to_rgb(that);
+  out = rgb_to_hsv(out);
   
   return out;
 }
