@@ -38,11 +38,12 @@ textarea{
     text-align: center;
     font-family: WWE_Raw;
     text-shadow: 2px 2px 1px #666;
+    margin-bottom: 30px;
 }
 .topic > p {
     color: #fafafa;
-    margin-left: 10%;
-    margin-right: 10%;
-    margin-bottom: 10pt;
+    margin: 0 10% 10pt 10%;
     line-height: 15pt;
+    text-shadow: 1px 1px 2px #333;
+    line-height: 20pt;
 }
