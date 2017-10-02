@@ -1,92 +1,96 @@
 @charset "UTF-8";
 
 @font-face {
-	font-family: "WWE_Raw";
-	src: url("../assets/ttf/wwe_raw.ttf");
+    font-family: "WWE_Raw";
+    src: url("../assets/ttf/wwe_raw.ttf");
 }
 
 body {
-	background-color: #fcfcfc;
+    background-color: #fcfcfc;
 }
 header {
-	width: 100%;
-	height: 86px;
-	position: fixed;
-	top: 0;
-	left: 0;
-	background-color: #333;
-	box-shadow: 0 1px 5px #666;
+    width: 100%;
+    height: 86px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #333;
+    box-shadow: 0 1px 5px #666;
 }
 header > h1 {
-	background: -webkit-linear-gradient(#f8f9f9, #fefefe, #333); /** Category text gradient gimmick */
-	-webkit-background-clip: text;
-	-webkit-text-fill-color: transparent;
-	
-	/**color: #fafafa;*/
-	float: left;
-	padding-top: 10px;
-	font-family: WWE_Raw;
-	font-size: 40pt;
+    background: -webkit-linear-gradient(#f8f9f9, #fefefe, #333); /** Category text gradient gimmick */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    
+    /**color: #fafafa;*/
+    float: left;
+    padding-top: 10px;
+    font-family: WWE_Raw;
+    font-size: 40pt;
 }
 header > figure {
-	float: left;
-	height: 64px;
-	margin: 12px;
+    float: left;
+    height: 64px;
+    margin: 12px;
 }
 header > figure > img {
-	height: 100%;
+    height: 100%;
 }
 main {
-	clear: both;
+    clear: both;
 }
 
 footer {
-	clear: both;
-	color: #fafafa;
-	background-color: #333;
-	padding: 10px 10px 10px 10px;
+    clear: both;
+    color: #fafafa;
+    background-color: #333;
+    padding: 10px 10px 10px 10px;
 }
 figcaption {
-	text-align: center;
-	font-style: italic;
+    text-align: center;
+    font-style: italic;
 }
 strong {
-	font-weight: bold;
+    font-weight: bold;
+}
+p, a, form {
+    font-family: sans-serif;
+    line-height: 15pt;
 }
 
 .root {
-	margin-top: 106px;
-	margin-left: 10%;
-	margin-right: 10%;
+    margin-top: 106px;
+    margin-left: 10%;
+    margin-right: 10%;
 }
 #section-title {
-	font-family: WWE_Raw;
-	font-size: 60pt;
-	text-align: center;
-	line-height: 25pt;
-	color: #222;
-	margin-bottom: 30px;
+    font-family: WWE_Raw;
+    font-size: 60pt;
+    text-align: center;
+    line-height: 25pt;
+    color: #222;
+    margin-bottom: 30px;
 }
 
 /** Minimenu at the header */
 .secundary-menu {
-	float:right;
-	margin-top: 10px;
+    float:right;
+    margin-top: 10px;
 }
 .secundary-menu > nav {
-	font-size: 10pt;
-	text-align: right;
+    font-size: 10pt;
+    text-align: right;
 }
 .secundary-menu > nav > a {
-	margin-right: 16px;
-	color: #e6e6e6;
-	text-decoration: none !important;
+    margin-right: 16px;
+    color: #e6e6e6;
+    text-decoration: none !important;
 }
 .secundary-menu > nav > a:hover {
-	color: #e6ff96;
+    color: #e6ff96;
 }
 .secundary-menu > nav > .active,
 .secundary-menu > nav > .active:hover {
-	color: red;
-	
+    color: red;
+    
 }

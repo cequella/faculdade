@@ -1,2 +1,25 @@
 @charset "UTF-8";
 
+#opnion {
+    width: 30vw;
+    background-color: #333;
+    margin: 0 auto 20px auto;
+    padding: 20px;
+    border-radius: 2pt;
+    box-shadow: 1px 1px 2px #666;
+    color: #fafafa;
+}
+form {
+    padding-bottom: 20px;
+}
+form > .single-line {
+    width: 20vw;
+    margin-left: 4.5vw;
+    margin-bottom: 10px;
+}
+
+textarea{
+    width: 20vw;
+    margin-bottom: 10px;
+    margin-left: 5vw;
+}
