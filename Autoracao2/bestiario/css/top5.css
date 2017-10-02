@@ -1,0 +1,30 @@
+@charset "UTF-8";
+
+.wrestler {
+	float: left;
+	margin-top: 30px;
+	margin-bottom: 30px;
+}
+.wrestler > .image {
+	padding: 10px;
+}
+.wrestler > .image > img {
+	border-radius: 2pt;
+	box-shadow: 1px 1px 3px #666;
+}
+.wrestler > .image > figcaption {
+	text-align: center;
+	font-style: italic;
+	margin: 10px;
+}
+.wrestler > p {
+	margin: 10px;
+	text-indent: 15pt;
+}
+.wrestler > h4 {
+	text-align: center;
+}
+
+.top5 {
+	width: 50%;
+}
