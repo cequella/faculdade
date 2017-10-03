@@ -3,48 +3,54 @@
 <html lang="pt-br">
   
   <head>
-	
-	<meta charset="utf-8"></meta>
+    
+    <meta charset="utf-8"></meta>
 
-	<title>WWE - World Wrestling Entertainment, Inc.</title>
+    <title>WWE - World Wrestling Entertainment, Inc.</title>
 
-	<link rel="stylesheet" type="text/css" href="./css/reset.css">
-	<link rel="stylesheet" type="text/css" href="./css/main.css">
-	<link rel="stylesheet" type="text/css" href="./css/game.css">
+    <link rel="stylesheet" type="text/css" href="./css/reset.css">
+    <link rel="stylesheet" type="text/css" href="./css/main.css">
+    <link rel="stylesheet" type="text/css" href="./css/game.css">
 
-	<link rel="icon" href="./assets/img/favicon.ico" type="image/ico">
-	
+    <link rel="icon" href="./assets/img/favicon.ico" type="image/ico">
+
+    <script src="./js/game.js"></script>
+    
   </head>
-  <body>
+  <body onLoad="start()">
 
-	<header>
-	  <figure>
-		<img src="./assets/img/wwe_alpha_logo.png">
-	  </figure>
+    <header>
+      <figure>
+	<img src="./assets/img/wwe_alpha_logo.png">
+      </figure>
 
-	  <h1>Game</h1>
-	  
-	  <div class="secundary-menu">
-		<nav>
-		  <a href="./index.html">Home</a>
-		  <a href="./top5.html">Top 5</a>
-		  <a href="./modalities.html" class="active">Modalities</a>
-		  <a href="./game.html">Game</a>
-		</nav>
-	  </div>
-	</header>
+      <h1>Game</h1>
+      
+      <div class="secundary-menu">
+	<nav>
+	  <a href="./index.html">Home</a>
+	  <a href="./top5.html">Top 5</a>
+	  <a href="./modalities.html">Modalities</a>
+	  <a href="./game.html" class="active">Game</a>
+	</nav>
+      </div>
+    </header>
 
-	<main>
-	  <div class="root">
-		<h1 id="section-title">Coming Soon</h1>
+    <main>
+      <div class="root" style="width: 100%; margin-left: 0;">
+	<h1 id="section-title">Coming Soon</h1>
 
-	  </div>
-	</main>
+	<canvas id="game" width="1600" height="1200">
+	  Your browser does not support html5.
+	</canvas>
 	
-	<footer>
-	  Verbatim copying and redistribution of this entire page are permitted provided this notice is preserved.<br>
-	  Contact: <strong>pedro.oliveira@alu.ufc.br</strong>
-	</footer>
-	  
+      </div>
+    </main>
+    
+    <footer>
+      Verbatim copying and redistribution of this entire page are permitted provided this notice is preserved.<br>
+      Contact: <strong>pedro.oliveira@alu.ufc.br</strong>
+    </footer>
+    
   </body>
 </html>
