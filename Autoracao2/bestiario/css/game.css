@@ -3,3 +3,8 @@
 #game {
     margin: 0 auto;
 }
+#nick {
+	width: 800px;
+	margin: 0 auto;
+	text-align: center;
+}

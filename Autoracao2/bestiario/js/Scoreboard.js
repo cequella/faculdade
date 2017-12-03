@@ -29,6 +29,7 @@ var Scoreboard = (function(){
 	}
 	Scoreboard.prototype.addScore = function(nick, score){
 		if(score < this.content[0].score) return;
+		if(nick=="") nick="John Doe";
 		
 		var scoremark = {nick: nick, score: score};
 		for(i=0; i<4; i++){

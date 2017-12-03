@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+  <head>
+	<meta charset="utf-8"></meta>
+	
+	<title> Game Tutorial</title>
+	
+	<link rel="stylesheet" type="text/css" href="./css/reset.css">
+	<link rel="stylesheet" type="text/css" href="./css/main.css">
+	<link rel="stylesheet" type="text/css" href="./css/tutorial.css">
+	
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  </head>
+  <body lang="pt-br">
+	<header>
+	  <figure>
+		<img src="./assets/img/wwe_alpha_logo.png">
+	  </figure>
+
+	  <h1>Game</h1>
+	  
+	  <div class="secundary-menu">
+		<nav>
+		  <a href="./index.html">Home</a>
+		  <a href="./top5.html">Top 5</a>
+		  <a href="./tutorial.html" class="active">Tutorial</a>
+		  <a href="./game.html">Game</a>
+		</nav>
+	  </div>
+	</header>
+	<script>
+	  
+	  $(document).ready(function(){
+	  
+	  $(".subtitle").click(function(){
+	  
+	  if($(this).next().is(":visible")){
+	  $(this).next().slideToggle("slow");
+	  }else{
+	  $(".content").hide(500);
+	  $(this).next().show(100);
+	  }
+	  });
+	  
+	  });
+	  
+	  
+	</script>
+    <main>
+      <div class="root" style="width: 100%; margin-left: 0;">
+		<h1 id="section-title">Tutorial</h1>
+		
+		<section>
+		  <article>
+			<div class="subtitle">
+			  <h4 id="section-subtitle">O Objetivo</h4>
+			</div>
+			<div class="content">
+			  <p>
+				Obter pontuação maior que a do pc.
+			  </p>
+			</div>
+		  </article>
+		  <article>
+			<div class="subtitle">
+			  <h4 id="section-subtitle">O Jogo</h4>
+			</div>
+			<div class="content">
+			  <ol class="order">
+				<li>
+				  <p>
+					O jogo baseia-se na comparação dos 
+					valores de sua carta com as do pc.
+				  </p>
+				</li>
+				<li>
+				  <p>
+					Para sua carta vencer, esta precisa ter 
+					valor maior do que a carta do pc no dado critério.
+				  </p>
+				</li>
+				
+			  </ol>
+			</div>
+		  </article>
+		  <article>
+			<div class="subtitle">
+			  <h4 id="section-subtitle">Placar</h4>
+			</div>
+			<div class="content">	
+			  <ol class="order">
+				<li>
+				  <p >
+					O placar mostra a sua pontuação atual.
+				  </p>
+				</li>
+				<li>
+				  <p>
+					O placar vai se alterando automaticamente 
+					a cada rodada.
+				  </p>
+				</li>
+			  </ol>
+			</div>
+		  </article>
+		  <article>
+			<div class="subtitle">
+			  <h4 id="section-subtitle">Como Jogar</h4>
+			</div>
+			<div class="content">
+			  <ol class="order">
+				<li>
+				  <p >
+					<strong>Observe:</strong> para o Supercard
+					escolhido, qual valor vence em cada 
+					característica: se o menor ou o 
+					maior valor.
+				  </p>
+				</li>
+				<br>
+				<li>
+				  <p>
+					<strong>Para iniciar:</strong> <br/> Escolha sua carta, aquela que 
+					você julga ter o valor capaz de vencer as cartas dos seus adversários.
+					Exemplo: clique sobre a carta e as cartas dos seus adversários se abrirão, mostrando 
+					quem venceu. Compare os resultados e escolha PRÓXIMA CARTA.
+					<br/>
+				  <p class="second"  >
+					<strong>A diferença dos pontos</strong> é somada aos seus pontos. Logo: se você ganhar
+					os seus pontos aumentam, se perder eles diminuem. O empate em nada altera.
+					<br/>
+				  </p>
+				</li>
+				<br>
+				<li>
+				  <p>
+					<strong>FIM DO JOGO:</strong> <br/>
+					O jogo termina quando ao fim de 5 rodadas, o vencedor é aquele que obtiver maior pontuação.
+				  </p>
+				</li>
+			  </ol>
+			</div>
+		  </article>
+		</section>
+		
+	  </div>
+	</main>
+	
+	<footer>
+	  Verbatim copying and redistribution of this entire page are permitted provided this notice is preserved.<br>
+	  Contact:  <strong>pedro.oliveira@alu.ufc.br and mbrunaro@gmail.com</strong>
+	</footer>
+	
+	
+  </body>
+</html>
