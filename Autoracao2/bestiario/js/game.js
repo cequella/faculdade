@@ -11,6 +11,7 @@ var Game = (function(){
 		this.currentRound = 0;
 		this.cache        = null
 		this.timer        = 0;
+		this.points       = 0;
 	}
 
 	// Private
@@ -33,7 +34,7 @@ var Game = (function(){
 			if(this.currentRound<5){
 				selectCards.call(this, this.mode[this.currentRound]%4);
 			} else {
-				showScoreboard.call(this, "0000");
+				showScoreboard.call(this);
 			}
 		} else {
 			battle.call(this, this.cache, this.mode[this.currentRound]%4);
@@ -68,6 +69,16 @@ var Game = (function(){
 		context.fillText(status, (context.canvas.width-width)/2, 100);
 		context.fillStyle = "transparent";
 
+		// Show Points
+		context.font = "30px Arial";
+		context.fillStyle = "white";
+		context.fillText(""+this.points, 0, 30);
+
+		// Show Rounds
+		context.font = "30px Arial";
+		context.fillStyle = "white";
+		context.fillText(""+this.currentRound, 0, 60);
+		
 		if(this.canvas.cursor.click){
 			this.cache = this.player.getClicked();
 		}
@@ -85,21 +96,26 @@ var Game = (function(){
 		userSelection.draw();
 		pcSelection.draw();
 
+		var points = userSelection.check(pcSelection, status);
+		
 		// Show winner
 		this.timer++;
 		if(this.timer > 60) {
 			context.font = "100px Arial";
 			context.fillStyle = "white";
-			if( userSelection.check(pcSelection, status)>0 ){
-				context.fillText("WIN", 100, 100);
-			} else {
+			if( points>0 ){
 				context.fillText("WIN", 100, 400);
+				context.fillText(""+points, 100, 500);
+			} else {
+				context.fillText("LOSE", 100, 400);
+				context.fillText(""+points, 100, 500);
 			}
 			context.fillStyle = "transparent";
 		}
 
 		// Back to Game
 		if(this.timer > 120) {
+			this.points += points;
 			this.player.discard(userIndex);
 			this.pc.discard(0);
 			this.currentRound++;
@@ -108,7 +124,7 @@ var Game = (function(){
 			this.timer = 0;
 		}
 	}
-	function showScoreboard(score){
+	function showScoreboard(){
 		var context = this.canvas.context;
 		var width;
 		context.fillStyle = "white";
@@ -120,12 +136,13 @@ var Game = (function(){
 		
 		// Score
 		context.font = "80px Arial";
-		width = context.measureText(score).width;
-		context.fillText(score, (context.canvas.width-width)/2, 180);
+		width = context.measureText(""+this.points).width;
+		context.fillText(""+this.points, (context.canvas.width-width)/2, 180);
 
 		// Score table
+		this.scoreboard.addScore(nickname.value, this.points);
 		this.scoreboard.draw(this.canvas, 220);
-
+		
 		context.fillStyle = "transparent";
 	}
 	function genDeck(){
@@ -150,8 +167,10 @@ var Game = (function(){
 })();
 
 var game;
+var nickname;
 (function(){
 	window.addEventListener("load", function(){
+		nickname = document.getElementById("nick");
 		game = new Game();
 	}, false);
 })()
