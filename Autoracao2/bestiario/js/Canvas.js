@@ -1,13 +1,9 @@
 var Canvas = (function(){
-	// Private Members
-	var canvas;
-	var context;
-	var mousePos = {x:0, y:0};
-	
 	// Constructor
 	function Canvas(elementId){
-		canvas  = document.getElementById(elementId);
-		context = canvas.getContext("2d");
+		this.canvas = document.getElementById(elementId);
+		this.context = this.canvas.getContext("2d");
+		this.mousePos = {x:0, y:0};
 		
 		setup.call(this);
 	}
@@ -15,17 +11,17 @@ var Canvas = (function(){
 	// Private
 	function setup(){		
 		// Resize
-		canvas.width  = 800;
-		canvas.height = 600;
+		this.canvas.width  = 800;
+		this.canvas.height = 600;
 
 		// Reposition
-		var temp = (window.innerWidth -canvas.width)/2;
-		canvas.style.marginLeft = temp+"px";
+		var temp = (window.innerWidth -this.canvas.width)/2;
+		this.canvas.style.marginLeft = temp+"px";
 
 		// Set events
-		canvas.addEventListener("mousemove", function(event){
-			var rect = canvas.getBoundingClientRect();
-			mousePos = {
+		this.canvas.addEventListener("mousemove", (event)=>{
+			var rect = this.canvas.getBoundingClientRect();
+			this.mousePos = {
 				x: (event.clientX-parseInt(rect.left)),
 				y: (event.clientY-parseInt(rect.top))
 			};
@@ -34,20 +30,14 @@ var Canvas = (function(){
 
 	// Public
 	Canvas.prototype.clear = function(fill){
-		context.clearRect(0, 0, canvas.width, canvas.height);
+		this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
 		return this;
 	}
-	Canvas.prototype.getContext = function(){
-		return context;
-	}
-	Canvas.prototype.getMousePos = function(){
-		return mousePos;
-	}
 	Canvas.prototype.writeInHUD = function(string, x, y){
-		context.fillStyle="white";
-		context.fontStyle="14px Arial";
-		context.fillText(string, x, y);
-		context.fillStyle="transparent";
+		this.context.fillStyle="white";
+		this.context.font="14px Arial";
+		this.context.fillText(string, x, y);
+		this.context.fillStyle="transparent";
 	}
 
 	return Canvas;

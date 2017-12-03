@@ -6,7 +6,7 @@ var ImageLoader = (function(){
 		this.y = 0;
 		this.width = null;
 		this.height = null;
-		this.context = canvas.getContext();
+		this.context = canvas.context;
 		this.content = new Image();
 		
 		setup.call(this, src);

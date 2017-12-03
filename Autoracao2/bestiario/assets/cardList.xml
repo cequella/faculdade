@@ -2,130 +2,130 @@
 <catalog>
   <card id="crd01">
     <name>Apollo_Crews</name>
-    <pow>1.079</pow>
-    <spd>1.064</spd>
-    <tgh>1.041</tgh>
-    <cha>1.011</cha>
+    <pow>1079</pow>
+    <spd>1064</spd>
+    <tgh>1041</tgh>
+    <cha>1011</cha>
 	<align>blue-left</align>
   </card>
   <card id="crd02">
     <name>Asuka</name>
-    <pow>1.067</pow>
+    <pow>1067</pow>
     <spd>999</spd>
-    <tgh>1.052</tgh>
-    <cha>1.022</cha>
+    <tgh>1052</tgh>
+    <cha>1022</cha>
 	<align>yellow-down</align>
   </card>
   <card id="crd03">
     <name>Bayle</name>
-    <pow>1.007</pow>
-    <spd>1.060</spd>
-    <tgh>1.030</tgh>
-    <cha>1.075</cha>
+    <pow>1007</pow>
+    <spd>1060</spd>
+    <tgh>1030</tgh>
+    <cha>1075</cha>
 	<align>yellow-down</align>
   </card>
   <card id="crd04">
     <name>Becky_Lynch</name>
-    <pow>1.030</pow>
-    <spd>1.061</spd>
-    <tgh>1.046</tgh>
-    <cha>1.076</cha>
+    <pow>1030</pow>
+    <spd>1061</spd>
+    <tgh>1046</tgh>
+    <cha>1076</cha>
 	<align>yellow-down</align>
   </card>
   <card id="crd05">
     <name>Big_Show</name>
-    <pow>1.059</pow>
+    <pow>1059</pow>
     <spd>991</spd>
-    <tgh>1.044</tgh>
-    <cha>1.014</cha>
+    <tgh>1044</tgh>
+    <cha>1014</cha>
 	<align>yellow-down</align>
   </card>
   <card id="crd06">
     <name>Brie_Bella</name>
-    <pow>1.035</pow>
-    <spd>1.080</spd>
-    <tgh>1.050</tgh>
-    <cha>1.065</cha>
+    <pow>1035</pow>
+    <spd>1080</spd>
+    <tgh>1050</tgh>
+    <cha>1065</cha>
 	<align>blue-left</align>
   </card>
   <card id="crd07">
     <name>Brock_Lesnar</name>
-    <pow>1.134</pow>
-    <spd>1.081</spd>
-    <tgh>1.104</tgh>
-    <cha>1.059</cha>
+    <pow>1134</pow>
+    <spd>1081</spd>
+    <tgh>1104</tgh>
+    <cha>1059</cha>
 	<align>yellow-up</align>
   </card>
   <card id="crd08">
     <name>Charlotte</name>
-    <pow>1.092</pow>
-    <spd>1.047</spd>
-    <tgh>1.085</tgh>
-    <cha>1.054</cha>
+    <pow>1092</pow>
+    <spd>1047</spd>
+    <tgh>1085</tgh>
+    <cha>1054</cha>
 	<align>yellow-up</align>
   </card>
   <card id="crd09">
     <name>Chris_Jericho</name>
-    <pow>1.042</pow>
-    <spd>1.087</spd>
-    <tgh>1.057</tgh>
-    <cha>1.072</cha>
+    <pow>1042</pow>
+    <spd>1087</spd>
+    <tgh>1057</tgh>
+    <cha>1072</cha>
 	<align>blue-left</align>
   </card>
   <card id="crd10">
     <name>Daniel_Bryan</name>
-    <pow>1.043</pow>
-    <spd>1.096</spd>
-    <tgh>1.065</tgh>
-    <cha>1.111</cha>
+    <pow>1043</pow>
+    <spd>1096</spd>
+    <tgh>1065</tgh>
+    <cha>1111</cha>
 	<align>blue-rigth</align>
   </card>
   <card id="crd11">
     <name>Dolph_Ziggler</name>
-    <pow>1.034</pow>
-    <spd>1.079</spd>
-    <tgh>1.049</tgh>
-    <cha>1.064</cha>
+    <pow>1034</pow>
+    <spd>1079</spd>
+    <tgh>1049</tgh>
+    <cha>1064</cha>
 	<align>blue-rigth</align>
   </card>
   <card id="crd12">
     <name>Edge</name>
-    <pow>1.092</pow>
-    <spd>1.107</spd>
-    <tgh>1.039</tgh>
-    <cha>1.061</cha>
+    <pow>1092</pow>
+    <spd>1107</spd>
+    <tgh>1039</tgh>
+    <cha>1061</cha>
 	<align>blue-left</align>
   </card>
   <card id="crd013">
     <name>Erick_Rowan</name>
-    <pow>1.043</pow>
-    <spd>1.013</spd>
-    <tgh>1.028</tgh>
+    <pow>1043</pow>
+    <spd>1013</spd>
+    <tgh>1028</tgh>
     <cha>998</cha>
 	<align>blue-left</align>
   </card>
   <card id="crd14">
     <name>John_Cena</name>
-    <pow>1.104</pow>
-    <spd>1.051</spd>
-    <tgh>1.073</tgh>
-    <cha>1.119</cha>
+    <pow>1104</pow>
+    <spd>1051</spd>
+    <tgh>1073</tgh>
+    <cha>1119</cha>
 	<align>blue-rigth</align>
   </card>
   <card id="crd15">
     <name>Sasha_Banks</name>
-    <pow>1.058</pow>
-    <spd>1.043</spd>
-    <tgh>1.073</tgh>
-    <cha>1.088</cha>
+    <pow>1058</pow>
+    <spd>1043</spd>
+    <tgh>1073</tgh>
+    <cha>1088</cha>
 	<align>blue-rigth</align>
   </card>
   <card id="crd16">
     <name>Seth_Rollins</name>
-    <pow>1.283</pow>
-    <spd>1.318</spd>
-    <tgh>1.354</tgh>
-    <cha>1.339</cha>
+    <pow>1283</pow>
+    <spd>1318</spd>
+    <tgh>1354</tgh>
+    <cha>1339</cha>
 	<align>blue-rigth</align>
   </card>
   <card id="crd17">
@@ -162,42 +162,42 @@
   </card>
   <card id="crd21">
     <name>Aj_Styles</name>
-    <pow>1.347</pow>
-    <spd>1.275</spd>
-    <tgh>1.367</tgh>
-    <cha>1.305</cha>
+    <pow>1347</pow>
+    <spd>1275</spd>
+    <tgh>1367</tgh>
+    <cha>1305</cha>
 	<align>blue-rigth</align>
   </card>
   <card id="crd22">
     <name>Batista</name>
-    <pow>1.103</pow>
-    <spd>1.057</spd>
-    <tgh>1.088</tgh>
-    <cha>1.035</cha>
+    <pow>1103</pow>
+    <spd>1057</spd>
+    <tgh>1088</tgh>
+    <cha>1035</cha>
 	<align>yellow-down</align>
   </card>
   <card id="crd23">
     <name>Bray_Wyatt</name>
-    <pow>1.357</pow>
-    <spd>1.314</spd>
-    <tgh>1.258</tgh>
-    <cha>1.365</cha>
+    <pow>1357</pow>
+    <spd>1314</spd>
+    <tgh>1258</tgh>
+    <cha>1365</cha>
 	<align>blue-rigth</align>
   </card>
   <card id="crd24">
     <name>Bret_Hart</name>
-    <pow>1.081</pow>
-    <spd>1.066</spd>
-    <tgh>1.096</tgh>
-    <cha>1.111</cha>
+    <pow>1081</pow>
+    <spd>1066</spd>
+    <tgh>1096</tgh>
+    <cha>1111</cha>
 	<align>blue-rigth</align>
   </card>
   <card id="crd25">
     <name>Eddie_Guerrero</name>
-    <pow>1.077</pow>
-    <spd>1.107</spd>
-    <tgh>1.062</tgh>
-    <cha>1.092</cha>
+    <pow>1077</pow>
+    <spd>1107</spd>
+    <tgh>1062</tgh>
+    <cha>1092</cha>
 	<align>yellow-up</align>
   </card>
   <card id="crd26">
@@ -226,10 +226,10 @@
   </card>
   <card id="crd28">
     <name>Samoa_Joe</name>
-    <pow>1.369</pow>
-    <spd>1.312</spd>
-    <tgh>1.334</tgh>
-    <cha>1.279</cha>
+    <pow>1369</pow>
+    <spd>1312</spd>
+    <tgh>1334</tgh>
+    <cha>1279</cha>
 	<align>blue-left</align>
   </card>
   <card id="crd29">
