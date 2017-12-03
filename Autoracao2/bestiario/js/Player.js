@@ -48,6 +48,11 @@ var Player = (function(){
 		this.hand.splice(index, 1);
 		this.needUpdate = true;
 	}
+	Player.prototype.getClicked = function(){
+		for(i=0; i<this.hand.length; i++){
+			if(this.hand[i].clicked) return i;
+		}
+	}
 	
 	return Player;
 })();

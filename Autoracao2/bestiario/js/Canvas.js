@@ -3,7 +3,7 @@ var Canvas = (function(){
 	function Canvas(elementId){
 		this.canvas = document.getElementById(elementId);
 		this.context = this.canvas.getContext("2d");
-		this.mousePos = {x:0, y:0};
+		this.cursor = {x:0, y:0, click: false};
 		
 		setup.call(this);
 	}
@@ -21,11 +21,18 @@ var Canvas = (function(){
 		// Set events
 		this.canvas.addEventListener("mousemove", (event)=>{
 			var rect = this.canvas.getBoundingClientRect();
-			this.mousePos = {
+			this.cursor = {
 				x: (event.clientX-parseInt(rect.left)),
 				y: (event.clientY-parseInt(rect.top))
 			};
 		}, false);
+		this.canvas.addEventListener("mouseup", (event)=>{
+			this.cursor.click = false;			
+		}, false);
+		this.canvas.addEventListener("mousedown", (event)=>{
+			this.cursor.click = true;			
+		}, false);
+
 	}
 
 	// Public

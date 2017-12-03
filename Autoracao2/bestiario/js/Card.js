@@ -10,9 +10,14 @@ var Card = (function(){
 		this.image.setDimension(128, 190);
 		this.collider = new AABBCollider(0, 0, this.image.width, this.image.height);
 		this.selected = false;
+		this.clicked  = false;
 
 		if(isPlayer){
 			this.collider.onMouseOver = ()=>{
+				if(this.canvas.cursor.click) {
+					this.clicked = true;
+				}
+
 				if(this.selected) return;
 				this.selected = true;
 				this.image.y -= 20;
@@ -35,7 +40,7 @@ var Card = (function(){
 	Card.prototype.draw = function(){
 		if(!this.image.ready) return;
 		this.image.render();
-		this.collider.check(this.canvas.mousePos);
+		this.collider.check(this.canvas.cursor);
 	}
 	Card.prototype.check = function(that, status){
 		return this.wrapper.status[status]-that.wrapper.status[status];
