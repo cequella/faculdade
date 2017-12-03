@@ -12,6 +12,7 @@ var Game = (function(){
 		this.cache        = null
 		this.timer        = 0;
 		this.points       = 0;
+		this.added        = false;
 	}
 
 	// Private
@@ -32,8 +33,13 @@ var Game = (function(){
 
 		if(this.cache == null){
 			if(this.currentRound<5){
+				this.added = false;
 				selectCards.call(this, this.mode[this.currentRound]%4);
 			} else {
+				if(!this.added){
+					this.scoreboard.addScore(nickname.value, this.points);
+					this.added = true;
+				}
 				showScoreboard.call(this);
 			}
 		} else {
@@ -140,10 +146,7 @@ var Game = (function(){
 		context.fillText(""+this.points, (context.canvas.width-width)/2, 180);
 
 		// Score table
-		this.scoreboard.addScore(nickname.value, this.points);
 		this.scoreboard.draw(this.canvas, 220);
-		
-		context.fillStyle = "transparent";
 	}
 	function genDeck(){
 		var doc = this.xmlManager.xml;
